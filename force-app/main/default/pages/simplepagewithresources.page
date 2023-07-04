@@ -1,0 +1,57 @@
+<apex:page standardController="Account" lightningStylesheets="true">
+    <!-- since we are using the standard controller for Account, and Account has a tabstyle
+        there's no need to specify tabstyle="Account" in the page tag -->
+
+    <apex:stylesheet value="{! URLFOR($Resource.PD1, '/ncsuheader.css')}" />
+    <apex:pageBlock >
+        <div class="container"> 
+            <div class="image"> 
+        <apex:image url="{! URLFOR($Resource.PD1, '/ncsu.ico')}" width="30" />
+    </div>
+        <div class="headertext"><h1>Quick Account Edit</h1></div>
+    </div>
+
+    </apex:pageBlock>
+
+
+    <apex:form >
+        <apex:pageBlock title="Account" id="accountPageBlock" tabStyle="account" mode="edit">
+            <apex:pageBlockSection showHeader="false" columns="2" id="accountSection">
+                <apex:outputField label="Account Owner" value="{!Account.Owner.Name}" />
+                <apex:inputText value="{!Account.Name}" />
+                <apex:inputText value="{!Account.Type}" />
+                <apex:inputText value="{!Account.Industry}" />
+                <apex:inputText value="{!Account.Site}" />
+                <apex:inputText value="{!Account.Phone}" />
+                <apex:inputTextArea value="{!Account.Description}" id="desc" />
+
+            </apex:pageBlockSection>
+
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save" />
+                <apex:commandButton onclick="filterWords('{!$Component.accountPageBlock.accountSection.desc}')" value="Check Description"
+                />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+
+    <apex:includeScript value="{! URLFOR($Resource.PD1, '/filterWords.js')}" />
+
+    <!-- onclick="doSomething('{!$Component.accountPageBlock.accountSection.desc}')" -->
+    <!-- <script>
+        function doSomething(elementId) {
+            const descText = document.getElementById(elementId).value;
+            //alert('description text: ' + descText);
+            const descArray = descText.split(" ");
+            //alert('broken into array: ' + JSON.stringify(descArray))
+            const words = ['maybe', 'should', 'think', 'like', 'very'];
+            const filteredArray = descArray.filter(value => words.includes(value));
+            if (filteredArray.length == 0)
+                alert('Congratulations, no weak or overused words found')
+            else
+                alert('Consider editing your text content. Found the following weak or overused words: ' + JSON.stringify(filteredArray));
+
+        }
+
+    </script> -->
+</apex:page>
