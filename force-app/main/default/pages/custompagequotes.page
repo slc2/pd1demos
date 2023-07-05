@@ -1,17 +1,43 @@
-<apex:page controller="PageQuotesController">
+<apex:page controller="PageQuotesController" cache="false">
+<style> 
+h1 {
+    border: 2px;
+    padding-top: 10px;
+    padding-left: 10px;
+    color:blue
+}
+
+.container {
+    border: 2px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.quote {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 1.25em;
+}
+
+.author {
+    font-family:cursive 
+}
+
+
+</style>
 
 <h1>Quote for 
     <apex:outputText value=" {0,date,dd' 'MMMMM' 'yyyy}">
     <apex:param value="{!Today()}" /> 
 </apex:outputText>
 </h1>
+<div class="container">
+    <div class="quote">
+        "{!quote}"
+    </div>
+
 <br/>
-Quote: {!quote}
-<br/>
-Author: {!author}
-<br/>
-QuoteType: {!quoteType}
-<br/>
-Endpoint: {!endpoint}
+Author: <span class="author">{!author}</span>
+</div>
+
 
 </apex:page>

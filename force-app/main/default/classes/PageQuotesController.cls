@@ -1,22 +1,22 @@
 public with sharing class PageQuotesController {
     public string quote = 'Have a nice day';
     public string author = 'Anonymous';
-    string defaultEndpoint = 'https://zenquotes.io/api/today';
-    string randomEndpoint = 'https://zenquotes.io/api/random';
+    string defaultEndpoint = 'https://zenquotes.io/api/random';
+    string todayEndpoint = 'https://zenquotes.io/api/today';
     string endpoint = defaultEndpoint;
-    string quoteType = '';
+
 
     public PageQuotesController() {
-        quoteType = ApexPages.currentPage().getParameters().get('type');
-        if (quoteType == 'random') {
-            endpoint = randomEndpoint;
+        string quoteType = ApexPages.currentPage().getParameters().get('type');
+        if (quoteType == 'today') {
+            endpoint = todayEndpoint;
         }
         // ignore any other value for parameter type since we default to 'today'
 
         requestQuote();
     }
 
-    private void requestQuote() {
+    void requestQuote() {
 
         string retrievedQuote = '';
         string retrievedAuthor = '';
@@ -29,8 +29,6 @@ public with sharing class PageQuotesController {
         if (response.getStatusCode() != 200) {
             return; // leave quote and author set to defaults
         }
-
-        //System.debug('*****response body: ' + response.getBody());
   
         JSONParser parser = JSON.createParser(response.getBody());
         while (parser.nextToken() != null) {
@@ -52,6 +50,7 @@ public with sharing class PageQuotesController {
 
     }
 
+
     public string getQuote() {
         return quote;
     }
@@ -59,10 +58,4 @@ public with sharing class PageQuotesController {
         return author;
     }
 
-    public string getQuoteType() {
-        return quoteType;
-    }
-    public string getEndpoint() {
-        return endpoint;
-    }
 }
