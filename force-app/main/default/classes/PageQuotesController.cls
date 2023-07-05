@@ -11,7 +11,6 @@ public with sharing class PageQuotesController {
         if (quoteType == 'today') {
             endpoint = todayEndpoint;
         }
-        // ignore any other value for parameter type since we default to 'today'
 
         requestQuote();
     }

@@ -1,0 +1,24 @@
+<apex:page standardController="Account" extensions="AccountControllerActionsExtension" lightningStylesheets="true">
+
+    <apex:sectionHeader title="Account Details With Audit on Delete" />
+
+    <apex:form >
+        <apex:pageBlock title="Account" id="accountPageBlock" tabStyle="account">
+            <apex:pageBlockSection showHeader="false" columns="2" id="accountSection">
+                <apex:outputField label="Account Owner" value="{!Account.Owner.Name}" />
+                <apex:outputField value="{!Account.Name}" />
+                <apex:outputField value="{!Account.Type}" />
+                <apex:outputField value="{!Account.Industry}" />
+                <apex:outputField value="{!Account.Site}" />
+                <apex:outputField value="{!Account.Phone}" />
+                <apex:outputText value="{!Account.Description}" id="desc" />
+            </apex:pageBlockSection>
+
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!edit}" value="Edit" />
+                <apex:commandButton action="{!deleteWithAudit}" onclick="if(confirm('Are you sure you want to delete the Account?')){return true;}else{return false;}" value="Delete" />              
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+
+</apex:page>
