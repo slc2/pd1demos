@@ -21,23 +21,21 @@ h1 {
 .author {
     font-family:cursive 
 }
-
-
 </style>
 
-<h1>Quote for 
-    <apex:outputText value=" {0,date,dd' 'MMMMM' 'yyyy}">
-    <apex:param value="{!Today()}" /> 
-</apex:outputText>
-</h1>
-<div class="container">
-    <div class="quote">
-        "{!quote}"
-    </div>
+    <h1>Quote for 
+        <apex:outputText value=" {0,date,dd' 'MMMMM' 'yyyy}">
+            <apex:param value="{!Today()}" /> 
+        </apex:outputText>
+    </h1>
+    <div class="container">
+        <div class="quote">
+            "{!quote}"
+        </div>
 
-<br/>
-Author: <span class="author">{!author}</span>
-</div>
+        <br/>
+        Author: <span class="author">{!author}</span>
+    </div>
 
 
 </apex:page>

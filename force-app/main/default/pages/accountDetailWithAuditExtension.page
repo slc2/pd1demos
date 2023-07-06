@@ -16,7 +16,7 @@
 
             <apex:pageBlockButtons >
                 <apex:commandButton action="{!edit}" value="Edit" />
-                <apex:commandButton action="{!deleteWithAudit}" onclick="if(confirm('Are you sure you want to delete the Account?')){return true;}else{return false;}" value="Delete" />              
+                <apex:commandButton disabled="{!notDeletable}" action="{!deleteWithAudit}" onclick="if(confirm('Are you sure you want to delete the Account?')){return true;}else{return false;}" value="Delete" />              
             </apex:pageBlockButtons>
         </apex:pageBlock>
     </apex:form>

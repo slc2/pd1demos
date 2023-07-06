@@ -1,49 +1,53 @@
 <apex:page standardController="Account" lightningStylesheets="true">
-    <!-- since we are using the standard controller for Account, and Account has a tabstyle
-        there's no need to specify tabstyle="Account" in the page tag -->
 
+    <style type="text/css"> 
+        .tipText {
+            font-style: italic;
+        }
+    </style>
     <apex:stylesheet value="{! URLFOR($Resource.PD1, '/ncsuheader.css')}" />
-    <apex:pageBlock >
-        <div class="container"> 
-            <div class="image"> 
-        <apex:image url="{! URLFOR($Resource.PD1, '/ncsu.ico')}" width="30" />
-    </div>
-        <div class="headertext"><h1>Quick Account Edit</h1></div>
-    </div>
+    <apex:pageBlock>
+        <div class="container">
+            <apex:image url="{! URLFOR($Resource.PD1, '/ncsu.ico')}" width="30" />
+            <div class="headertext">
+                <h1 style="color:darkred">Quick Account Edit</h1>
+            </div>
+        </div>
 
     </apex:pageBlock>
 
 
-    <apex:form >
-        <apex:pageBlock title="Account" id="accountPageBlock" tabStyle="account" mode="edit">
-            <apex:pageBlockSection showHeader="false" columns="2" id="accountSection">
-                <apex:outputField label="Account Owner" value="{!Account.Owner.Name}" />
-                <apex:inputText value="{!Account.Name}" />
-                <apex:inputText value="{!Account.Type}" />
-                <apex:inputText value="{!Account.Industry}" />
-                <apex:inputText value="{!Account.Site}" />
-                <apex:inputText value="{!Account.Phone}" />
-                <apex:inputTextArea value="{!Account.Description}" id="desc" />
+    <apex:form>
+        
+            <apex:pageBlock title="Account" id="accountPageBlock" tabStyle="account" mode="edit">
+                <apex:pageBlockSection showHeader="false" columns="2" id="accountSection">
+                    <apex:outputField label="Account Owner" value="{!Account.Owner.Name}" />
+                    <apex:inputText value="{!Account.Name}" />
+                    <apex:inputText value="{!Account.Type}" />
+                    <apex:inputText value="{!Account.Industry}" />
+                    <apex:inputText value="{!Account.Site}" />
+                    <apex:inputText value="{!Account.Phone}" />
+                    <apex:inputTextArea value="{!Account.Description}" id="desc" />
+                </apex:pageBlockSection>
 
-            </apex:pageBlockSection>
-
-            <apex:pageBlockButtons >
-                <apex:commandButton action="{!save}" value="Save" />
-                <apex:commandButton onclick="filterWords('{!$Component.accountPageBlock.accountSection.desc}')" value="Check Description"
-                />
-            </apex:pageBlockButtons>
-        </apex:pageBlock>
+                <apex:pageBlockButtons>
+                    <apex:commandButton action="{!save}" value="Save" />
+                    <apex:commandButton onclick="filterWords('{!$Component.accountPageBlock.accountSection.desc}')" 
+                    value="Check Description"/>
+                </apex:pageBlockButtons>
+                <apex:outputText styleClass="tipText" 
+                    value="Tip: Check your description text for overused words."/>
+            </apex:pageBlock>
+        
     </apex:form>
 
     <apex:includeScript value="{! URLFOR($Resource.PD1, '/filterWords.js')}" />
 
-    <!-- onclick="doSomething('{!$Component.accountPageBlock.accountSection.desc}')" -->
+    <!-- javascript can be added directly to page instead of including from static resource -->
     <!-- <script>
-        function doSomething(elementId) {
+        function filterWords(elementId) {
             const descText = document.getElementById(elementId).value;
-            //alert('description text: ' + descText);
             const descArray = descText.split(" ");
-            //alert('broken into array: ' + JSON.stringify(descArray))
             const words = ['maybe', 'should', 'think', 'like', 'very'];
             const filteredArray = descArray.filter(value => words.includes(value));
             if (filteredArray.length == 0)
