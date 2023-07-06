@@ -3,39 +3,16 @@
         there's no need to specify tabstyle="Account" in the page tag -->
 
     <apex:sectionHeader title="Account Quick View" />
-    <!-- standard controller and out of the box VF components -->
-    <!--  <apex:detail relatedList="false"/>  -->
-
+    <!-- example 1 -->
     <!--
-    <apex:pageBlock title="Hello {!$User.FirstName} {!$User.LastName}">
-        <apex:detail subject="{!Account.Owner.Id}" relatedList="false"/>
-    </apex:pageBlock>
+     <apex:detail relatedList="true"/>  
     -->
-    <apex:form >
-        <apex:pageBlock title="Account" tabStyle="account">
-            <apex:pageBlockSection showHeader="false" columns="2">
-                <apex:outputText value="{!Account.Owner.Name}" />
-                <apex:outputText value="{!Account.Name}" />
-                <apex:outputText value="{!Account.Type}" />
-                <apex:outputText value="{!Account.Industry}" />
-                <apex:outputText value="{!Account.Site}" />
-                <apex:outputText value="{!Account.Phone}" />
-            </apex:pageBlockSection>
-            <apex:pageBlockButtons >
-                <apex:commandButton action="{!edit}" value="Edit" />
-                <apex:commandButton action="{!list}" value="Go to Accounts List" />
-            </apex:pageBlockButtons>
-        </apex:pageBlock>
-    </apex:form>
 
-    <!--  <apex:relatedList list="Contacts" /> -->
-    <apex:pageBlock title="Contact">
-        <apex:pageBlockTable value="{!Account.Contacts}" var="contact">
-            <apex:column value="{!contact.name}" />
-            <apex:column value="{!contact.email}" />
-            <apex:column value="{!contact.mobilephone}" />
-            <apex:column value="{!contact.phone}" />
-        </apex:pageBlockTable>
-    </apex:pageBlock>
+    <!-- example 2 -->
+    
+        <apex:detail relatedList="false"/>
+        <apex:relatedList list="Contacts"/>
+    
+
 
 </apex:page>
