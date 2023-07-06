@@ -1,6 +1,6 @@
 public  without sharing class AccountAuditUtil {
     public static void saveAudit(string id) {
-        // don't check CRUD or field access; running in system mode intentionally to create audit record
+        // don't check CRUD or field access for Account; audit requirements are to save specified data from record
         Account a = [select id, name, site from account where id = :id limit 1];
 
         AccountAudit__c accountAudit = new AccountAudit__c();
