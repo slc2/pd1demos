@@ -1,18 +1,17 @@
 <apex:page standardController="Account" lightningStylesheets="true">
-    <!-- since we are using the standard controller for Account, and Account has a tabstyle
-        there's no need to specify tabstyle="Account" in the page tag -->
-
     <apex:sectionHeader title="Account Quick View" />
     <!-- example 1 -->
-    <!--
-     <apex:detail relatedList="true"/>  
-    -->
+   
+    <apex:detail relatedList="true" /> 
+    <!-- you don't have to specify the subject for the record in scope -->
+    <!-- <apex:detail relatedList="true" subject="{!account.id}"/>   -->
+  
 
     <!-- example 2 -->
-    
-        <apex:detail relatedList="false"/>
-        <apex:relatedList list="Contacts"/>
-    
+        
+    <!-- <apex:detail relatedList="false"/>
+         <apex:relatedList list="Contacts"/> -->
+   
 
 
 </apex:page>

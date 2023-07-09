@@ -1,20 +1,18 @@
 <apex:page standardController="Account" lightningStylesheets="true">
     <apex:sectionHeader title="Account Quick View" />
-
+ 
     <apex:pageBlock title="Hello {!$User.FirstName} {!$User.LastName}">
-        <apex:detail subject="{!Account.Owner.Id}" relatedList="false"/>
     </apex:pageBlock>
 
- 
     <apex:form >
-        <apex:pageBlock title="Account" tabStyle="account">
+        <apex:pageBlock title="Account">
             <apex:pageBlockSection showHeader="false" columns="2">
-                <apex:outputText value="{!Account.Owner.Name}" />
-                <apex:outputText value="{!Account.Name}" />
-                <apex:outputText value="{!Account.Type}" />
-                <apex:outputText value="{!Account.Industry}" />
-                <apex:outputText value="{!Account.Site}" />
-                <apex:outputText value="{!Account.Phone}" />
+                <apex:outputText label="Account Owner" value="{!account.Owner.Name}" />
+                <apex:outputText label="Account Name" value="{!account.Name}" />
+                <apex:outputText value="{!account.Type}" />
+                <apex:outputText value="{!account.Industry}" />
+                <apex:outputText value="{!account.Site}" />
+                <apex:outputText value="{!account.Phone}" />
             </apex:pageBlockSection>
             <apex:pageBlockButtons >
                 <apex:commandButton action="{!edit}" value="Edit" />
@@ -24,12 +22,13 @@
     </apex:form>
 
     <apex:pageBlock title="Contact">
-        <apex:pageBlockTable value="{!Account.Contacts}" var="contact">
+        <apex:pageBlockTable value="{!account.Contacts}" var="contact">
             <apex:column value="{!contact.name}" />
             <apex:column value="{!contact.email}" />
             <apex:column value="{!contact.mobilephone}" />
             <apex:column value="{!contact.phone}" />
         </apex:pageBlockTable>
     </apex:pageBlock>
+
 
 </apex:page>

@@ -16,9 +16,7 @@
 
     </apex:pageBlock>
 
-
     <apex:form>
-        
             <apex:pageBlock title="Account" id="accountPageBlock" tabStyle="account" mode="edit">
                 <apex:pageBlockSection showHeader="false" columns="2" id="accountSection">
                     <apex:outputField label="Account Owner" value="{!Account.Owner.Name}" />
@@ -43,7 +41,7 @@
 
     <apex:includeScript value="{! URLFOR($Resource.PD1, '/filterWords.js')}" />
 
-    <!-- javascript can be added directly to page instead of including from static resource -->
+    <!-- javascript can be added directly to a page instead of including from static resource -->
     <!-- <script>
         function filterWords(elementId) {
             const descText = document.getElementById(elementId).value;
