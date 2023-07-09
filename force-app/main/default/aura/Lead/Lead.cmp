@@ -1,0 +1,48 @@
+<aura:component controller="LeadPriorityController">
+
+    <aura:attribute name="lead" type="Lead"/>
+    <aura:attribute name="priorityMap" type="Map"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:card  title="{!v.lead.Name}" iconName="standard:lead">
+        <!-- <aura:set attribute="actions">
+            <lightning:button name="details" label="Details" onclick="{!c.goToRecord}"/>
+        </aura:set>  -->
+        <table>
+            <tr>
+                <th>Id</th>
+                <td>{!v.lead.Id}</td>
+            </tr>
+            <tr>
+                <th>Company</th>
+                <td>{!v.lead.Company}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{!v.lead.LeadSource}</td>
+            </tr>
+            <!-- <tr>
+                <th>Priority</th>
+                <td>{!v.lead.Priority__c}</td>
+            </tr> -->
+            <tr>
+                <th>Priority</th>
+                <td>
+                    <lightning:select aura:id="priorityPicklist" value="{!v.lead.Priority__c}" 
+                        onchange="{!c.handlePriorityChange}" name="priorityPicklist">
+                        <aura:iteration items="{!v.priorityMap}" var="i" indexVar="key">
+                            <option text="{!i.value}" value="{!i.key}" selected="{!i.key==v.lead.Priority__c}" />
+                        </aura:iteration>
+                    </lightning:select>
+                </td>
+
+            </tr>
+        </table>
+
+
+        <div slot="footer">
+            <a class="slds-card__footer-action" onclick="{!c.goToRecord}">View Lead Details</a>
+        </div>
+
+    </lightning:card>
+</aura:component>	
