@@ -3,30 +3,20 @@
     <aura:attribute name="lead" type="Lead"/>
     <aura:attribute name="priorityMap" type="Map"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="cmpEvent" type="c:leadChanged"/>
 
     <lightning:card  title="{!v.lead.Name}" iconName="standard:lead">
-        <!-- <aura:set attribute="actions">
-            <lightning:button name="details" label="Details" onclick="{!c.goToRecord}"/>
-        </aura:set>  -->
-        <table>
+        <table class="tb">
             <tr>
-                <th>Id</th>
-                <td>{!v.lead.Id}</td>
-            </tr>
-            <tr>
-                <th>Company</th>
+                <th class="thpad">Company</th>
                 <td>{!v.lead.Company}</td>
             </tr>
             <tr>
-                <th>Source</th>
+                <th class="thpad">Source</th>
                 <td>{!v.lead.LeadSource}</td>
             </tr>
-            <!-- <tr>
-                <th>Priority</th>
-                <td>{!v.lead.Priority__c}</td>
-            </tr> -->
             <tr>
-                <th>Priority</th>
+                <th class="thpad">Priority</th>
                 <td>
                     <lightning:select aura:id="priorityPicklist" value="{!v.lead.Priority__c}" 
                         onchange="{!c.handlePriorityChange}" name="priorityPicklist">

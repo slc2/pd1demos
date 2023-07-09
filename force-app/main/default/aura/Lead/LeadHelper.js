@@ -16,21 +16,26 @@
             var state = response.getState();
 
             console.log(`state from response: ${state}`);
-            // // Display toast message to indicate load status
-            // var toastEvent = $A.get("e.force:showToast");
-            // if (state === 'SUCCESS'){
-            //     toastEvent.setParams({
-            //         "title": "Success!",
-            //         "message": " Your lead was updated."
-            //     });
-            // }
-            // else {
-            //     toastEvent.setParams({
-            //             "title": "Error!",
-            //             "message": " Updating lead failed."
-            //     });
-            // }
-            // toastEvent.fire();
+            // Display toast message to indicate load status
+            var toastEvent = $A.get("e.force:showToast");
+            if (state === 'SUCCESS'){
+                toastEvent.setParams({
+                    "title": "Success!",
+                    "message": " Your lead was updated."
+                });
+                var cmpEvent = cmp.getEvent("cmpEvent");
+                cmpEvent.setParams({
+                    "leadId" : recordId
+                });
+                cmpEvent.fire();
+            }
+            else {
+                toastEvent.setParams({
+                        "title": "Error!",
+                        "message": " Updating lead failed."
+                });
+            }
+            toastEvent.fire();
         });
         $A.enqueueAction(action);
     },

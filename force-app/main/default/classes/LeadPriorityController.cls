@@ -17,7 +17,7 @@ public with sharing class LeadPriorityController {
         if (!accessOk()) {
             throw new AuraHandledException('Insufficient access');
         }
-        return [SELECT Id, Company, LeadSource, Name, Priority__c from Lead WITH SECURITY_ENFORCED ORDER BY CreatedDate DESC LIMIT 50]; 
+        return [SELECT Id, Company, LeadSource, Name, Priority__c from Lead WITH SECURITY_ENFORCED ORDER BY Priority__c DESC, CreatedDate DESC LIMIT 50]; 
     }
 
     @AuraEnabled

@@ -1,2 +1,9 @@
 .THIS {
 }
+.THIS .thpad {
+    padding-right: 2px;
+
+}
+.THIS .tb {
+    width: 100%;
+}

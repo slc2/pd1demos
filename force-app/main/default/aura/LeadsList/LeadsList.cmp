@@ -1,8 +1,7 @@
 <aura:component implements="force:appHostable" controller="LeadPriorityController">
     <!-- Handle component initialization in a client-side controller -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
-    
-    <!--  load the list of leads -->
+    <aura:handler name="cmpEvent" event="c:leadChanged" action="{!c.handleLeadChangedEvent}"/>
     <aura:attribute name="leads" type="Lead[]"/>
     <aura:attribute name="totalLeads" type="Integer"/>
     
@@ -16,6 +15,7 @@
                 <p class="slds-text-title_caps slds-line-height_reset">Leads</p>
                 <h1 class="slds-page-header__title slds-p-right_x-small">Organize Leads' Priority</h1>
             </lightning:layoutItem>
+
         </lightning:layout>
     
         <lightning:layout>
@@ -23,24 +23,23 @@
                 <p class="slds-text-body_small">Organize priority for the {!v.totalLeads} most recent leads</p>
             </lightning:layoutItem>
         </lightning:layout>
+        <lightning:layout>
+            <lightning:layoutItem>
+                <!-- <input type="checkbox" aura:id="refreshList" 
+                    name="refreshList" 
+                    checked="true"/>
+                <label for="refreshList">Automatically refresh list on priority changes</label> -->
+                <lightning:input type="checkbox" name="refreshList" aura:id="refreshList" checked="true" label="Automatically refresh list on priority changes"></lightning:input>
+            </lightning:layoutItem>
+        </lightning:layout>
     </div>
     
-    <!-- Body with list of leads -->
-    <lightning:layout>
-        <lightning:layoutItem padding="horizontal-medium" >
-            <!-- Create a dropdown menu with options -->
-            <!-- <lightning:select aura:id="select" label="Lead Source" name="source" 
-                              onchange="{!c.handleSelect}" class="slds-m-bottom_medium">
-                <option value="">- - Select a Lead Source - -</option>
-                <option value="Referral" text="Referral"/>
-                <option value="Social Media" text="Social Media"/>
-                <option value="All" text="All"/>
-            </lightning:select> -->
-    
-            <!-- Iterate over the list of leads and display them -->
-            <aura:iteration var="lead" items="{!v.leads}">
+
+    <lightning:layout multipleRows="true">
+        <aura:iteration var="lead" items="{!v.leads}">
+            <lightning:layoutItem padding="around-small" > 
                 <c:lead lead="{!lead}"/>
-            </aura:iteration>
-        </lightning:layoutItem>
+            </lightning:layoutItem>
+        </aura:iteration>
     </lightning:layout>
 </aura:component>
