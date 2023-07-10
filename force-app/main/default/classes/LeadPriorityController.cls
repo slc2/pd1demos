@@ -14,15 +14,15 @@ public with sharing class LeadPriorityController {
 
     @AuraEnabled
     public static List<Lead> getLeads() {
-        if (!accessOk()) {
+        if (!accessIsOk()) {
             throw new AuraHandledException('Insufficient access');
         }
-        return [SELECT Id, Company, LeadSource, Name, Priority__c from Lead WITH SECURITY_ENFORCED ORDER BY Priority__c DESC, CreatedDate DESC LIMIT 50]; 
+        return [SELECT Id, Company, LeadSource, Name, Priority__c from Lead WHERE Status = 'Open - Not Contacted' WITH SECURITY_ENFORCED ORDER BY Priority__c DESC, CreatedDate DESC LIMIT 50]; 
     }
 
     @AuraEnabled
     public static void updatePriority(String leadId, String priority){
-        if (!accessOk()) {
+        if (!accessIsOk()) {
             throw new AuraHandledException('Insufficient access');
         }
         try {
@@ -34,7 +34,7 @@ public with sharing class LeadPriorityController {
         }
     }
 
-    private static boolean accessOk() {
+    private static boolean accessIsOk() {
         List<String> leadAccessFields = new List<String> {
             'Id',
             'Company',
