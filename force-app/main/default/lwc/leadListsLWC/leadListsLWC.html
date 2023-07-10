@@ -1,0 +1,45 @@
+<template>
+        <!-- Page header with a counter that displays total number of leads -->
+        <div class="slds-page-header slds-page-header_object-home">
+            <lightning-layout>
+                <lightning-layout-item>
+                    <lightning-icon icon-name="standard:lead"></lightning-icon>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-var-m-left_small">
+                    <p class="slds-text-title_caps slds-line-height_reset">Leads</p>
+                    <h1 class="slds-page-header__title slds-var-p-right_x-small">Organize Leads' Priority</h1>
+                </lightning-layout-item>
+    
+            </lightning-layout>
+        
+            <lightning-layout>
+                <lightning-layout-item>
+                    <p class="slds-text-body_small">Organize priority for the v.totalLeads most recent leads</p>
+                </lightning-layout-item>
+            </lightning-layout> 
+            <lightning-layout>
+                <lightning-layout-item>
+                    <lightning-input type="checkbox" name="refreshList"  checked="true" label="Automatically refresh list on priority changes"></lightning-input>
+                    
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        
+    
+        <lightning-layout horizontal-align="center" multiple-rows="true">
+            <template for:each={leads} for:item="lead">
+                <!-- lightning-layout-item for each boat -->
+                <lightning-layout-item
+                  key={lead.Id} flexibility="auto" padding="around-small">
+                  <!-- Each card goes here -->
+  
+                  {lead.Id}, {lead.Name}, {lead.Company}, {lead.Priority__c}
+                  <!-- <c-boat-tile
+                    boat={boat}
+                    onboatselect={updateSelectedTile}
+                    selected-boat-id={selectedBoatId}
+                  ></c-boat-tile> -->
+                </lightning-layout-item>
+              </template>
+        </lightning-layout>
+</template>
