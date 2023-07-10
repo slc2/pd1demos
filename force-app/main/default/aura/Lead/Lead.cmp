@@ -6,18 +6,19 @@
     <aura:registerEvent name="cmpEvent" type="c:leadChanged"/>
 
     <lightning:card  title="{!v.lead.Name}" iconName="standard:lead">
+        <div class="container">
         <table class="tb">
             <tr>
                 <th class="thpad">Company</th>
-                <td>{!v.lead.Company}</td>
+                <td class="tdfixed">{!v.lead.Company}</td>
             </tr>
             <tr>
                 <th class="thpad">Source</th>
-                <td>{!v.lead.LeadSource}</td>
+                <td class="tdfixed">{!v.lead.LeadSource}</td>
             </tr>
             <tr>
                 <th class="thpad">Priority</th>
-                <td>
+                <td class="tdfixed">
                     <lightning:select aura:id="priorityPicklist" value="{!v.lead.Priority__c}" 
                         onchange="{!c.handlePriorityChange}" name="priorityPicklist">
                         <aura:iteration items="{!v.priorityMap}" var="i" indexVar="key">
@@ -28,9 +29,9 @@
 
             </tr>
         </table>
+        </div>
 
-
-        <div slot="footer">
+        <div slot="footer" class="leftindent">
             <a class="slds-card__footer-action" onclick="{!c.goToRecord}">View Lead Details</a>
         </div>
 
