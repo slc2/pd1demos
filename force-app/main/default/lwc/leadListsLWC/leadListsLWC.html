@@ -9,9 +9,7 @@
                     <p class="slds-text-title_caps slds-line-height_reset">Leads</p>
                     <h1 class="slds-page-header__title slds-var-p-right_x-small">Organize Leads' Priority</h1>
                 </lightning-layout-item>
-    
-            </lightning-layout>
-        
+            </lightning-layout>       
             <lightning-layout>
                 <lightning-layout-item>
                     <p class="slds-text-body_small">Organize priority for the v.totalLeads most recent leads</p>
@@ -19,26 +17,17 @@
             </lightning-layout> 
             <lightning-layout>
                 <lightning-layout-item>
-                    <lightning-input type="checkbox" name="refreshList"  checked="true" label="Automatically refresh list on priority changes"></lightning-input>
-                    
+                    <lightning-input type="checkbox" name="refreshList"  checked="true" label="Automatically refresh list on priority changes"></lightning-input>                 
                 </lightning-layout-item>
             </lightning-layout>
         </div>
         
     
-        <lightning-layout horizontal-align="center" multiple-rows="true">
+        <lightning-layout  horizontal-align="spread" multiple-rows="true">
             <template for:each={leads} for:item="lead">
-                <!-- lightning-layout-item for each boat -->
                 <lightning-layout-item
                   key={lead.Id} flexibility="auto" padding="around-small">
-                  <!-- Each card goes here -->
-  
-                  {lead.Id}, {lead.Name}, {lead.Company}, {lead.Priority__c}
-                  <!-- <c-boat-tile
-                    boat={boat}
-                    onboatselect={updateSelectedTile}
-                    selected-boat-id={selectedBoatId}
-                  ></c-boat-tile> -->
+                    <c-lead-l-w-c lead={lead}></c-lead-l-w-c>
                 </lightning-layout-item>
               </template>
         </lightning-layout>

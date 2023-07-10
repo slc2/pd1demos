@@ -1,3 +1,31 @@
 <template>
-    
+        <lightning-card  title={lead.Name} icon-name="standard:lead">
+        <div class="container">
+            <table >
+                <tr>
+                    <th>Company</th>
+                    <td class="tdfixed">{lead.Company}</td>
+                </tr>
+                <tr>
+                    <th>Source</th>
+                    <td class="tdfixed">{lead.LeadSource}</td>
+                </tr>
+                <tr>
+                    <th>Priority</th>
+                    <td>
+                        {lead.Priority__c}
+                        <lightning-combobox 
+                        name="priority"
+                        value={lead.Priority__c}
+                        options={options}
+                        onchange={handlePriorityChange}
+                        ></lightning-combobox>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div slot="footer" class="leftindent">
+            <a class="slds-card__footer-action" onclick={goToRecord}>View Lead Details</a>
+        </div>
+    </lightning-card>
 </template>

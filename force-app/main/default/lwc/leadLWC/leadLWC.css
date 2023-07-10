@@ -1,0 +1,24 @@
+
+th {
+    padding-right: 1em;
+}
+table {
+    max-width: 20em;
+    width: 100%;
+    table-layout: fixed;
+}
+.tdfixed {
+    width: 15em;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.container {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.leftindent {
+    padding-left: 4px;
+}
+

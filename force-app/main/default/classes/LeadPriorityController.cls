@@ -1,7 +1,7 @@
 
 public with sharing class LeadPriorityController {
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static Map<String, String> getPriorityFieldValues(){
         Map<String, String> options = new Map<String, String>();
         Schema.DescribeFieldResult fr = Lead.Priority__c.getDescribe();
