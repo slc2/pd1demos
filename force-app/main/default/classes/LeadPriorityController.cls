@@ -12,7 +12,7 @@ public with sharing class LeadPriorityController {
         return options;
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<Lead> getLeads() {
         if (!accessIsOk()) {
             throw new AuraHandledException('Insufficient access');
