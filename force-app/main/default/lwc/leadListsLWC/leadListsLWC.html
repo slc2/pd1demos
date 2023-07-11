@@ -22,15 +22,21 @@
             </lightning-layout>
         </div>
         
-    
+        <template lwc:if={error}>
+            <div>
+                Error loading leads.
+                <br/>
+                {error}
+            </div>
+        </template>
         <lightning-layout  horizontal-align="spread" multiple-rows="true">
             <template if:true={provisionedLeads.data}>
-            <template for:each={provisionedLeads.data} for:item="lead">
-                <lightning-layout-item
-                  key={lead.Id} flexibility="auto" padding="around-small">
-                    <c-lead-l-w-c lead={lead} onupdated={leadUpdatedHandler}> </c-lead-l-w-c>
-                </lightning-layout-item>
-              </template>
+                <template for:each={provisionedLeads.data} for:item="lead">
+                    <lightning-layout-item
+                    key={lead.Id} flexibility="auto" padding="around-small">
+                        <c-lead-l-w-c lead={lead} onupdated={leadUpdatedHandler}> </c-lead-l-w-c>
+                    </lightning-layout-item>
+                </template>
             </template>
         </lightning-layout>
 </template>

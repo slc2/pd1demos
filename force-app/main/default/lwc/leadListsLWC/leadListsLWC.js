@@ -1,19 +1,21 @@
 import { LightningElement, track, wire } from 'lwc';
-import getLeads from '@salesforce/apex/LeadPriorityController.getLeads';
+import retrieveLeads from '@salesforce/apex/LeadPriorityController.retrieveLeads';
 import { refreshApex } from '@salesforce/apex';
 
 export default class LeadListsLWC extends LightningElement {
     leadsCount;
     @track provisionedLeads;
+    @track error;
 
-    @wire(getLeads)
+    @wire(retrieveLeads)
     wiredLeads(provisionedResults) {
        this.provisionedLeads = provisionedResults;
        const { data, error } = provisionedResults;
        if (data) {
           this.leadsCount = data.length;
        } else if (error) {
-          console.log(`data.error: ${JSON.stringify(error)}`);
+         this.error = JSON.stringify(error);
+         console.log(`Error retrieving leads: ${this.error}`);
        }
      }
 

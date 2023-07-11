@@ -1,11 +1,14 @@
 ({
     loadLeads : function(cmp) {
-         var action = cmp.get("c.getLeads");
+         var action = cmp.get("c.auraRetrieveLeads");
          action.setCallback(this, function(response) {
+            console.log(`in loadLeads, response: ${JSON.stringify(response)}`);
              var state = response.getState();
              if (state === "SUCCESS") {
-                 cmp.set("v.leads", response.getReturnValue());
-                 this.updateTotal(cmp);
+                var refreshedLeads = response.getReturnValue();
+                console.log(`refreshed leads: ${JSON.stringify(refreshedLeads)}`);
+                 cmp.set("v.leads", refreshedLeads);
+                 cmp.set("v.totalLeads", refreshedLeads.length);
              }        
              
              if (state !== 'SUCCESS'){
@@ -17,11 +20,7 @@
                  toastEvent.fire();
              }             
          });
-          $A.enqueueAction(action);
+         $A.enqueueAction(action);
      },
-      
-     updateTotal: function(cmp) {
-       var leads = cmp.get("v.leads");
-       cmp.set("v.totalLeads", leads.length);
-     }
+
  })

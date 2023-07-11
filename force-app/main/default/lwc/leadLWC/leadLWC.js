@@ -19,6 +19,7 @@ export default class LeadLWC extends NavigationMixin(LightningElement) {
         fieldApiName: Priority__c_FIELD
     })
     options;
+
     @track error;
 
     goToRecord() {
@@ -35,26 +36,24 @@ export default class LeadLWC extends NavigationMixin(LightningElement) {
 
     handlePriorityChange(event) {
         var newPriority = event.target.value;
-        console.log(`priority changed to ${event.target.value}`);
         updatePriority({leadId: this.lead.Id, priority: newPriority})
-        .then(()=>{
-            console.log('save was ok');
-            this.dispatchEvent(new CustomEvent('updated', {
-                "leadId" : this.lead.Id
-            }));
-            
-            const event = new ShowToastEvent({
-                title: `Lead ${this.lead.Name} Updated`,
-                message: 'Priority saved',
-                variant: 'success',
-                mode: 'dismissable'
-            });
-            this.dispatchEvent(event);
+            .then(()=>{
+                this.dispatchEvent(new CustomEvent('updated', {
+                        "leadId" : this.lead.Id
+                }));
+                
+                const event = new ShowToastEvent({
+                    title: `Lead ${this.lead.Name} updated`,
+                    message: 'Priority saved',
+                    variant: 'success',
+                    mode: 'dismissable'
+                });
+                this.dispatchEvent(event);
 
-        })
-        .catch(error=> {
-            this.error = JSON.stringify(error);
-            console.log(`save failed, error: ${JSON.stringify(error)}`);
-        })
+            })
+            .catch(error => {
+                this.error = JSON.stringify(error);
+                console.log(`Saving lead(${this.lead.Id}), error: ${JSON.stringify(error)}`);
+            })
     }
 }

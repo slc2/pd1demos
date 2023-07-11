@@ -13,7 +13,17 @@ public with sharing class LeadPriorityController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<Lead> getLeads() {
+    public static List<Lead> retrieveLeads() {
+        if (!accessIsOk()) {
+            throw new AuraHandledException('Insufficient access');
+        }
+        return [SELECT Id, Company, LeadSource, Name, Priority__c from Lead WHERE Status = 'Open - Not Contacted' WITH SECURITY_ENFORCED ORDER BY Priority__c DESC, CreatedDate DESC LIMIT 50]; 
+    }
+
+    // the cacheable setting sometimes causes issues with the aura component getting updated data, so
+    // duplicating the method to retrieve leads intentionally
+    @AuraEnabled
+    public static List<Lead> auraRetrieveLeads() {
         if (!accessIsOk()) {
             throw new AuraHandledException('Insufficient access');
         }

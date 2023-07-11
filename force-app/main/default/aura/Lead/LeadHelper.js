@@ -1,6 +1,6 @@
 ({
     updateLead : function(cmp, recordId, newPriority) {
-        console.log(`before getting controller method, cmp: ${JSON.stringify(cmp)}`);
+        console.log(`in updateLead, recordId: ${recordId}, newPriority: ${newPriority}`);
 
         var action = cmp.get("c.updatePriority");
         action.setParam("leadId", recordId);
@@ -9,19 +9,12 @@
         action.setCallback(this, function(response) {
             var state = response.getState();
 
-            console.log(`state from response: ${state}`);
-            // Display toast message to indicate load status
             var toastEvent = $A.get("e.force:showToast");
             if (state === 'SUCCESS'){
                 toastEvent.setParams({
                     "title": "Success!",
                     "message": " Your lead was updated."
                 });
-                var cmpEvent = cmp.getEvent("cmpEvent");
-                cmpEvent.setParams({
-                    "leadId" : recordId
-                });
-                cmpEvent.fire();
             }
             else {
                 toastEvent.setParams({
@@ -30,7 +23,16 @@
                 });
             }
             toastEvent.fire();
+
+            if (state === 'SUCCESS') {
+                var cmpEvent = cmp.getEvent("cmpEvent");
+                cmpEvent.setParams({
+                    "leadId" : recordId
+                });
+                cmpEvent.fire();
+            }
         });
+        
         $A.enqueueAction(action);
     },
     getPicklistValues: function(component, event) {
