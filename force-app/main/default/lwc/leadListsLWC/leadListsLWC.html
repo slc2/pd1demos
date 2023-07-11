@@ -12,23 +12,25 @@
             </lightning-layout>       
             <lightning-layout>
                 <lightning-layout-item>
-                    <p class="slds-text-body_small">Organize priority for the v.totalLeads most recent leads</p>
+                    <p class="slds-text-body_small">Organize priority for the {leadsCount} most recent leads</p>
                 </lightning-layout-item>
             </lightning-layout> 
             <lightning-layout>
                 <lightning-layout-item>
-                    <lightning-input type="checkbox" name="refreshList"  checked="true" label="Automatically refresh list on priority changes"></lightning-input>                 
+                    <lightning-input type="checkbox" name="refreshList" data-id="refreshList" checked="true" label="Automatically refresh list on priority changes"></lightning-input>                 
                 </lightning-layout-item>
             </lightning-layout>
         </div>
         
     
         <lightning-layout  horizontal-align="spread" multiple-rows="true">
-            <template for:each={leads} for:item="lead">
+            <template if:true={provisionedLeads.data}>
+            <template for:each={provisionedLeads.data} for:item="lead">
                 <lightning-layout-item
                   key={lead.Id} flexibility="auto" padding="around-small">
-                    <c-lead-l-w-c lead={lead}></c-lead-l-w-c>
+                    <c-lead-l-w-c lead={lead} onupdated={leadUpdatedHandler}> </c-lead-l-w-c>
                 </lightning-layout-item>
               </template>
+            </template>
         </lightning-layout>
 </template>

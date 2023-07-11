@@ -1,8 +1,9 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import { NavigationMixin} from 'lightning/navigation';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
-import Priority__c_FIELD from '@salesforce/schema/Lead.Priority__c';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
+import Priority__c_FIELD from '@salesforce/schema/Lead.Priority__c';
 import Lead_OBJECT from '@salesforce/schema/Lead';
 import updatePriority from '@salesforce/apex/LeadPriorityController.updatePriority';
 
@@ -38,6 +39,18 @@ export default class LeadLWC extends NavigationMixin(LightningElement) {
         updatePriority({leadId: this.lead.Id, priority: newPriority})
         .then(()=>{
             console.log('save was ok');
+            this.dispatchEvent(new CustomEvent('updated', {
+                "leadId" : this.lead.Id
+            }));
+            
+            const event = new ShowToastEvent({
+                title: `Lead ${this.lead.Name} Updated`,
+                message: 'Priority saved',
+                variant: 'success',
+                mode: 'dismissable'
+            });
+            this.dispatchEvent(event);
+
         })
         .catch(error=> {
             this.error = JSON.stringify(error);

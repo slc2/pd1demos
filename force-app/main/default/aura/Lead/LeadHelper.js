@@ -3,14 +3,8 @@
         console.log(`before getting controller method, cmp: ${JSON.stringify(cmp)}`);
 
         var action = cmp.get("c.updatePriority");
-
-        // action.setParams({
-        //     leadId: recordId,
-        //     priority: newPriority
-        // });
         action.setParam("leadId", recordId);
         action.setParam("priority", newPriority);
-        console.log(`action: ${JSON.stringify(action)}`);
 
         action.setCallback(this, function(response) {
             var state = response.getState();
