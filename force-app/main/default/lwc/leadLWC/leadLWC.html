@@ -1,5 +1,5 @@
 <template>
-        <lightning-card  title={lead.Name} icon-name="standard:lead">
+        <lightning-card  title={lead.Name}  icon-name="standard:lead">
         <div class="container">
             <table >
                 <tr>
@@ -13,17 +13,24 @@
                 <tr>
                     <th>Priority</th>
                     <td>
-                        {lead.Priority__c}
-                        <lightning-combobox 
-                        name="priority"
-                        value={lead.Priority__c}
-                        options={options}
-                        onchange={handlePriorityChange}
-                        ></lightning-combobox>
+                        <template if:true={options.data}>
+                            <lightning-combobox 
+                                name="priority"
+                                value={lead.Priority__c}
+                                options={options.data.values}
+                                onchange={handlePriorityChange}
+                            ></lightning-combobox>
+                        </template>
                     </td>
                 </tr>
             </table>
+            <template lwc:if={error}>
+                <div>
+                    Error saving priority: {error}
+                </div>
+            </template>
         </div>
+
         <div slot="footer" class="leftindent">
             <a class="slds-card__footer-action" onclick={goToRecord}>View Lead Details</a>
         </div>

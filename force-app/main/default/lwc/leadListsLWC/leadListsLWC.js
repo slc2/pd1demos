@@ -8,7 +8,7 @@ export default class LeadListsLWC extends LightningElement {
     wiredLeads({error, data}) {
        if (data) {
           this.leads = data;
-          console.log(`leads: ${JSON.stringify(this.leads)}`);
+          //console.log(`leads: ${JSON.stringify(this.leads)}`);
        } else if (error) {
           console.log(`data.error: ${JSON.stringify(error)}`);
        }
