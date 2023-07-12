@@ -14,6 +14,8 @@ export default class LeadLWC extends NavigationMixin(LightningElement) {
     @wire(getObjectInfo, { objectApiName: Lead_OBJECT})
     leadMetadata;
 
+    // This component depends on the Lead object not having record types, and therefore we
+    // use the default record type id to retrieve picklist values for the Priority__c field.
     @wire (getPicklistValues, {
         recordTypeId: '$leadMetadata.data.defaultRecordTypeId',
         fieldApiName: Priority__c_FIELD

@@ -7,12 +7,12 @@
                 </lightning-layout-item>
                 <lightning-layout-item class="slds-var-m-left_small">
                     <p class="slds-text-title_caps slds-line-height_reset">Leads</p>
-                    <h1 class="slds-page-header__title slds-var-p-right_x-small">Organize Leads' Priority</h1>
+                    <h1 class="slds-page-header__title slds-var-p-right_x-small">Organize Leads Priority</h1>
                 </lightning-layout-item>
             </lightning-layout>       
             <lightning-layout>
                 <lightning-layout-item>
-                    <p class="slds-text-body_small">Organize priority for the {leadsCount} most recent leads</p>
+                    <p class="slds-text-body_small">Displaying {leadsCount} most recent open, non-contacted leads</p>
                 </lightning-layout-item>
             </lightning-layout> 
             <lightning-layout>
@@ -32,8 +32,7 @@
         <lightning-layout  horizontal-align="spread" multiple-rows="true">
             <template if:true={provisionedLeads.data}>
                 <template for:each={provisionedLeads.data} for:item="lead">
-                    <lightning-layout-item
-                    key={lead.Id} flexibility="auto" padding="around-small">
+                    <lightning-layout-item key={lead.Id} flexibility="auto" padding="around-small">
                         <c-lead-l-w-c lead={lead} onupdated={leadUpdatedHandler}> </c-lead-l-w-c>
                     </lightning-layout-item>
                 </template>
