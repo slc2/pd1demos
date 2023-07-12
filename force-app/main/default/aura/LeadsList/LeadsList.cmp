@@ -11,16 +11,16 @@
             <lightning:layoutItem>
                 <lightning:icon iconName="standard:lead" />
             </lightning:layoutItem>
-            <lightning:layoutItem class="slds-m-left_small">
+            <lightning:layoutItem class="slds-var-m-left_small">
                 <p class="slds-text-title_caps slds-line-height_reset">Leads</p>
-                <h1 class="slds-page-header__title slds-p-right_x-small">Organize Leads' Priority</h1>
+                <h1 class="slds-page-header__title slds-var-p-right_x-small">Organize Leads Priority</h1>
             </lightning:layoutItem>
 
         </lightning:layout>
     
         <lightning:layout>
             <lightning:layoutItem>
-                <p class="slds-text-body_small">Organize priority for the {!v.totalLeads} most recent leads</p>
+                <p class="slds-text-body_small">Displaying {!v.totalLeads} most recent open, non-contacted leads</p>
             </lightning:layoutItem>
         </lightning:layout>
         <lightning:layout>
