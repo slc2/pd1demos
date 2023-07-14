@@ -2,11 +2,9 @@
     loadLeads : function(cmp) {
          var action = cmp.get("c.auraRetrieveLeads");
          action.setCallback(this, function(response) {
-            console.log(`in loadLeads, response: ${JSON.stringify(response)}`);
              var state = response.getState();
              if (state === "SUCCESS") {
                 var refreshedLeads = response.getReturnValue();
-                console.log(`refreshed leads: ${JSON.stringify(refreshedLeads)}`);
                  cmp.set("v.leads", refreshedLeads);
                  cmp.set("v.totalLeads", refreshedLeads.length);
              }        

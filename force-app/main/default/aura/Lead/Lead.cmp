@@ -1,7 +1,7 @@
 <aura:component controller="LeadPriorityController">
 
-    <aura:attribute name="lead" type="Lead"/>
-    <aura:attribute name="priorityMap" type="Map"/>
+    <aura:attribute name="lead" type="Lead" access="public"/>
+    <aura:attribute name="priorityMap" type="Map" access="private"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:registerEvent name="cmpEvent" type="c:leadChanged"/>
 

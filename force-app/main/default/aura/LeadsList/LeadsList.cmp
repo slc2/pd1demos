@@ -2,8 +2,8 @@
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:handler name="cmpEvent" event="c:leadChanged" action="{!c.handleLeadChangedEvent}"/>
-    <aura:attribute name="leads" type="Lead[]"/>
-    <aura:attribute name="totalLeads" type="Integer"/>
+    <aura:attribute name="leads" type="Lead[]" access="private"/>
+    <aura:attribute name="totalLeads" type="Integer" access="private"/>
     
     <!-- Page header with a counter that displays total number of leads -->
     <div class="slds-page-header slds-page-header_object-home">
